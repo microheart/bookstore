@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/bookstore">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="java"></property>
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>xushun/bookstore/model/Member.hbm.xml</value>
+				<value>xushun/bookstore/model/Administor.hbm.xml</value>
+				<value>xushun/bookstore/model/BBS.hbm.xml</value>
+				<value>
+					xushun/bookstore/model/BookComment.hbm.xml
+				</value>
+				<value>xushun/bookstore/model/Book.hbm.xml</value>
+				<value>xushun/bookstore/model/FirstType.hbm.xml</value>
+				<value>
+					xushun/bookstore/model/OrderDetail.hbm.xml
+				</value>
+				<value>xushun/bookstore/model/Order.hbm.xml</value>
+				<value>xushun/bookstore/model/SecondType.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- DAO组件 -->
+	
+	<bean id="memberDao" class="xushun.bookstore.dao.impl.MemberDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="bookDao" class="xushun.bookstore.dao.impl.BookDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="firstTypeDao" class="xushun.bookstore.dao.impl.FirstTypeDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="secondTypeDao" class="xushun.bookstore.dao.impl.SecondTypeDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="commentDao" class="xushun.bookstore.dao.impl.BookCommentDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="orderDao" class="xushun.bookstore.dao.impl.OrderDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="orderDetailDao" class="xushun.bookstore.dao.impl.OrderDetailDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="adminDao" class="xushun.bookstore.dao.impl.AdministorDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="bbsDao" class="xushun.bookstore.dao.impl.BBSDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- end DAO组件 -->
+	
+	
+	<!-- 业务管理组件 -->
+	
+	<bean id="memberManager" class="xushun.bookstore.service.impl.MemberManagerImpl">
+		<property name="memberDao" ref="memberDao"></property>
+	</bean>
+	
+	<bean id="bookManager" class="xushun.bookstore.service.impl.BookManagerImpl">
+		<property name="bookDao" ref="bookDao"></property>
+	</bean>
+	
+	<bean id="bookTypeManager" class="xushun.bookstore.service.impl.BookTypeManagerImpl">
+		<property name="firstTypeDao" ref="firstTypeDao"></property>
+		<property name="secondTypeDao" ref="secondTypeDao"></property>
+	</bean>
+	
+	<bean id="orderManager" class="xushun.bookstore.service.impl.OrderManagerImpl">
+		<property name="orderDao" ref="orderDao"></property>
+		<property name="orderDetailDao" ref="orderDetailDao"></property>
+	</bean>
+	
+	<bean id="adminManager" class="xushun.bookstore.service.impl.AdministorManagerImpl">
+		<property name="adminDao" ref="adminDao"></property>
+	</bean>
+	
+	<bean id="commentManager" class="xushun.bookstore.service.impl.BookCommentManagerImpl">
+		<property name="commentDao" ref="commentDao"></property>
+	</bean>
+	
+	<!-- end业务管理组件 -->
+
+
+	<!-- 事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="allServerMethod"
+			expression="execution(* xushun.bookstore.service..*.*(..))" />
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="allServerMethod" />
+	</aop:config>
+	
+
+
+</beans>

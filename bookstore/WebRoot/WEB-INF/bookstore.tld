@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+ "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+ 
+ <taglib>
+ 	<tlib-version>1.0</tlib-version>
+ 	<jsp-version>1.2</jsp-version>
+ 	<short-name>bookstore tag</short-name>
+ 	<uri>/bookstore-tags</uri>
+ 	<display-name>"bookstore"</display-name>
+ 	<description><![CDATA[网上书店标签]]></description>
+ 	
+ 	
+ 	<tag>
+ 		<name>dateTimeFormat</name>
+ 		<tag-class>xushun.bookstore.tag.DateTimeFormatTag</tag-class>
+ 		<body-content>empty</body-content>
+ 		<description><![CDATA[用于格式化日期，默认情况采用如下格式：yyyy-MM-dd HH:mm:ss]]></description>
+ 		<attribute>
+ 			<name>value</name>
+ 			<required>false</required>
+ 			<rtexprvalue>true</rtexprvalue>
+ 			<description><![CDATA[需要被格式化的日期值,默认为当前时间]]></description>
+ 		</attribute>
+ 		<attribute>
+ 			<name>pattern</name>
+ 			<required>false</required>
+ 			<rtexprvalue>false</rtexprvalue>
+ 			<description><![CDATA[指定格式化日期的模式字符串，不指定时采用默认格式]]></description>
+ 		</attribute>
+ 		<attribute>
+ 			<name>type</name>
+ 			<required>false</required>
+ 			<rtexprvalue>false</rtexprvalue>
+ 			<description><![CDATA[需要被格式化的日期值的类型（date，long),默认为long]]></description>
+ 		</attribute>
+ 	</tag>
+ 	
+ </taglib>

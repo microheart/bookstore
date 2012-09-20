@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" /> 
+    <constant name="struts.objectFactory" value="spring" />
+	<package name="shopping" extends="struts-default">	
+
+		<interceptors>
+			<interceptor name="memberAuthorityInterceptor" class="xushun.bookstore.interceptor.MemberAuthorityInterceptor"></interceptor>
+			
+			<interceptor-stack name="memberStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="memberAuthorityInterceptor"></interceptor-ref>
+			</interceptor-stack>
+			
+			<interceptor name="adminAuthorityInterceptor" class="xushun.bookstore.interceptor.AdminAuthorityInterceptor"></interceptor>
+			
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="adminAuthorityInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<global-results>
+			<result name="member_login">/WEB-INF/pages/member/login.jsp</result>
+			<result name="admin_login">/WEB-INF/pages/manager/user/login.jsp</result>
+		</global-results>
+
+		<action name="shopping_addCartItem" class="xushun.bookstore.action.OrderAction" method="addCartItem">
+			<result type="redirect-action">shopping_cart</result>
+		</action>
+				
+		<action name="shopping_cart" class="xushun.bookstore.action.OrderAction" method="cart">
+			<result>/WEB-INF/pages/shopping/showCart.jsp</result>
+		</action>	
+		
+		<action name="shopping_checkout" class="xushun.bookstore.action.OrderAction" method="checkout">
+			<result>/WEB-INF/pages/shopping/checkout.jsp</result>
+			<result name="nonbook" type="redirect-action">home</result>
+			<interceptor-ref name="memberStack"></interceptor-ref>
+		</action>	
+				
+		<action name="shopping_submitOrder" class="xushun.bookstore.action.OrderAction" method="submitOrder">
+			<result type="redirect-action">home</result>
+			<interceptor-ref name="memberStack"></interceptor-ref>
+		</action>
+		
+		<action name="shopping_viewOrder" class="xushun.bookstore.action.OrderAction" method="viewOrder">
+			<result>/WEB-INF/pages/shopping/orderInfo.jsp</result>
+		</action>
+		
+		<action name="shopping_listOrders" class="xushun.bookstore.action.OrderAction" method="listOrders">
+			<result>/WEB-INF/pages/shopping/listOrders.jsp</result>
+			<interceptor-ref name="memberStack"></interceptor-ref>
+		</action>
+		
+		<action name="shopping_adminListOrders" class="xushun.bookstore.action.OrderAction" method="adminListOrders">
+			<result>/WEB-INF/pages/manager/shopping/listOrders.jsp</result>
+			<interceptor-ref name="adminStack"></interceptor-ref>
+		</action>
+		
+		<action name="shopping_toEditOrder" class="xushun.bookstore.action.OrderAction" method="toEditOrder">
+			<result>/WEB-INF/pages/manager/shopping/editOrder.jsp</result>
+			<interceptor-ref name="adminStack"></interceptor-ref>
+		</action>
+		
+		<action name="shopping_editOrder" class="xushun.bookstore.action.OrderAction" method="editOrder">
+			<result name="success" type="redirect-action">shopping_adminListOrders</result>
+			<result name="input">/WEB-INF/pages/manager/shopping/editOrder.jsp</result>
+			<interceptor-ref name="adminStack"></interceptor-ref>
+		</action>
+	
+		<action name="shopping_listDealedOrders" class="xushun.bookstore.action.OrderAction" method="listDealedOrders">
+			<result name="success">/WEB-INF/pages/manager/shopping/listOrders.jsp</result>
+			<interceptor-ref name="adminStack"></interceptor-ref>
+		</action>		
+
+		<action name="shopping_listNonDealedOrders" class="xushun.bookstore.action.OrderAction" method="listNonDealedOrders">
+			<result name="success">/WEB-INF/pages/manager/shopping/listOrders.jsp</result>
+			<interceptor-ref name="adminStack"></interceptor-ref>
+		</action>		
+	</package>
+	
+	<package name="shopping-json" extends="json-default">
+		
+		<action name="shopping_deleteCartItem" method="deleteCartItem"
+			class="xushun.bookstore.action.OrderAction">
+			<result type="json"></result>
+		</action>
+		
+		<action name="shopping_modifyCartItemCount" method="modifyCartItemCount"
+			class="xushun.bookstore.action.OrderAction">
+			<result type="json"></result>
+		</action>
+		
+		<action name="shopping_deleteOrder" method="deleteOrder"
+			class="xushun.bookstore.action.OrderAction">
+			<result type="json"></result>
+		</action>
+	</package>
+
+</struts>

@@ -1,0 +1,100 @@
+.border {
+	background-color: #F4F9FF;
+	border: 1px solid #C3C3C3;
+	width: 866px;
+	text-align: left;
+}
+
+.m_list_notice {
+	color: #878787;
+	height: 27px;
+	padding-left: 65px;
+}
+
+.kuang{
+	border-bottom: 1px dashed #D2D5DA;
+	padding: 20px 0 10px 42px;
+}
+
+
+
+.kuang h3 {
+	font-size: 14px;
+	height: 37px;
+}
+
+
+
+.m_list {
+	height: 25px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+
+.m_list .text {
+	padding-top: 4px;
+	padding-right:4px;
+	width: 80px;
+	text-align: right;
+	float: left;
+}
+
+.textbox_1 {
+	border: 1px solid #909292;
+	height: 15px;
+	margin-right: 6px;
+	padding: 3px 0 0 3px;
+	width: 436px;
+}
+
+.textbox_2 {
+	border: 1px solid #909292;
+	float: left;
+	height: 15px;
+	margin-right: 6px;
+	padding: 3px 0 0 3px;
+	width: 197px;
+}
+
+.textbox_3 {
+	border: 1px solid #909292;
+	float: left;
+	height: 15px;
+	margin-right: 5px;
+	padding: 3px 0 0 3px;
+	width: 127px;
+}
+
+.textbox_4 {
+	border: 1px solid #909292;
+	height: 15px;
+	margin-right: 5px;
+	padding: 3px 0 0 3px;
+	width: 92px;
+}
+
+.kuang ul {
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+	padding-bottom: 15px;
+	padding-left: 37px;
+}
+
+
+
+.kuang ul li {
+	height: 21px;
+	padding-bottom: 2px;
+}
+
+.orderstatus {
+	text-align: left;
+	padding: 20px 0 10px 50px;
+}
+
+.orderstatus span {
+	padding-right: 5px;
+}
+
+

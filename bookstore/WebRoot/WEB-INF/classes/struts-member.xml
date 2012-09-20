@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" /> 
+    <constant name="struts.objectFactory" value="spring" />
+	<package name="member" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="memberAuthorityInterceptor" class="xushun.bookstore.interceptor.MemberAuthorityInterceptor"></interceptor>
+			
+			<interceptor-stack name="memberStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="memberAuthorityInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<global-results>
+			<result name="member_login">/WEB-INF/pages/member/login.jsp</result>
+		</global-results>
+		
+		<action name="member_home"  class="xushun.bookstore.action.MemberAction" method="home">
+			<result name="success">/WEB-INF/pages/home/home.jsp</result>	
+		</action>
+		
+		<action name="member_toRegister"  class="xushun.bookstore.action.MemberAction" method="toRegister">
+			<result name="success">/WEB-INF/pages/member/register.jsp</result>	
+		</action>
+		
+		<action name="member_register"  class="xushun.bookstore.action.MemberAction" method="register">
+			<result name="success" type="redirect-action">home</result>	
+			<result name="input">/WEB-INF/pages/member/register.jsp</result>
+		</action>
+
+		<action name="member_toLogin"  class="xushun.bookstore.action.MemberAction" method="toLogin">
+			<result name="success">/WEB-INF/pages/member/login.jsp</result>	
+		</action>
+		
+		<action name="member_login"  class="xushun.bookstore.action.MemberAction" method="login">
+			<result name="success" type="redirect-action" >home</result>
+			<result name="input">/WEB-INF/pages/member/login.jsp</result>	
+		</action>	
+		
+		<action name="member_logout"  class="xushun.bookstore.action.MemberAction" method="logout">
+			<result name="success" type="redirect-action">home</result>	
+			<interceptor-ref name="memberStack"></interceptor-ref>
+		</action>
+			
+		<action name="member_toEditInfo"  class="xushun.bookstore.action.MemberAction" method="toEditInfo">
+			<result name="success">/WEB-INF/pages/member/editInfo.jsp</result>
+			<interceptor-ref name="memberStack"></interceptor-ref>	
+		</action>	
+			
+		<action name="member_editInfo"  class="xushun.bookstore.action.MemberAction" method="editInfo">
+			<result name="success" type="redirect-action">home</result>	
+			<interceptor-ref name="memberStack"></interceptor-ref>
+		</action>
+
+		<action name="member_toModifyPassword"  class="xushun.bookstore.action.MemberAction" method="toModifyPassword">
+			<result>/WEB-INF/pages/member/modifyPassword.jsp</result>
+			<interceptor-ref name="memberStack"></interceptor-ref>
+		</action>
+
+		<action name="member_modifyPassword"  class="xushun.bookstore.action.MemberAction" method="modifyPassword">
+			<result name="success" type="redirect-action">home</result>	
+			<result name="input">/WEB-INF/pages/member/modifyPassword.jsp</result>
+			<interceptor-ref name="memberStack"></interceptor-ref>
+		</action>
+				
+	</package>
+
+
+	<package name="member-json" extends="json-default">
+		
+		<action name="member_deleteMember" method="deleteMember"
+			class="xushun.bookstore.action.MemberAction">
+			<result type="json"></result>
+		</action>
+		
+	</package>
+	
+</struts>

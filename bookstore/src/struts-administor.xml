@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" /> 
+    <constant name="struts.objectFactory" value="spring" />
+    
+    
+	<package name="admin" extends="struts-default">
+		
+		<interceptors>
+			<interceptor name="adminAuthorityInterceptor" class="xushun.bookstore.interceptor.AdminAuthorityInterceptor"></interceptor>
+			
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="adminAuthorityInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="adminStack"></default-interceptor-ref>
+		
+		<global-results>
+			<result name="admin_login">/WEB-INF/pages/manager/user/login.jsp</result>
+		</global-results>
+		
+		<action name="admin_listMembers"  class="xushun.bookstore.action.AdministorAction" method="listMembers">
+			<result name="success">/WEB-INF/pages/manager/user/listMembers.jsp</result>	
+		</action>
+		
+		<action name="admin_listMembersByName"  class="xushun.bookstore.action.AdministorAction" method="listMembersByName">
+			<result name="success">/WEB-INF/pages/manager/user/listMembers.jsp</result>	
+		</action>
+
+		<action name="admin_listAdmins"  class="xushun.bookstore.action.AdministorAction" method="listAdmins">
+			<result name="success">/WEB-INF/pages/manager/user/listAdmins.jsp</result>	
+		</action>
+		
+		<action name="admin_listAdminsByName"  class="xushun.bookstore.action.AdministorAction" method="listAdminsByName">
+			<result name="success">/WEB-INF/pages/manager/user/listAdmins.jsp</result>	
+		</action>
+		
+		<action name="admin_toModifyPassword"  class="xushun.bookstore.action.AdministorAction" method="toModifyPassword">
+			<result name="success">/WEB-INF/pages/manager/user/modifyPassword.jsp</result>	
+		</action>
+		
+		<action name="admin_modifyPassword"  class="xushun.bookstore.action.AdministorAction" method="modifyPassword">
+			<result name="success" type="redirect-action">admin_listAdmins</result>	
+			<result name="input">/WEB-INF/pages/manager/user/modifyPassword.jsp</result>
+		</action>
+		
+		<action name="admin_toLogin"  class="xushun.bookstore.action.AdministorAction" method="toLogin">
+			<result name="success">/WEB-INF/pages/manager/user/login.jsp</result>	
+		</action>
+		
+		<action name="admin_login"  class="xushun.bookstore.action.AdministorAction" method="login">
+			<result name="success" type="redirect-action">admin_listMembers</result>	
+			<result name="input">/WEB-INF/pages/manager/user/login.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		<action name="admin_toAddAdmin"  class="xushun.bookstore.action.AdministorAction" method="toAddAdmin">
+			<result name="success">/WEB-INF/pages/manager/user/addAdmin.jsp</result>	
+		</action>
+		
+		<action name="admin_addAdmin"  class="xushun.bookstore.action.AdministorAction" method="addAdmin">
+			<result name="success" type="redirect-action">admin_listAdmins</result>	
+			<result name="input">/WEB-INF/pages/manager/user/addAdmin.jsp</result>
+		</action>
+	</package>
+	
+	<package name="admin-json" extends="json-default">
+		
+		<action name="admin_deleteAdmin" method="deleteAdmin"
+			class="xushun.bookstore.action.AdministorAction">
+			<result type="json"></result>
+		</action>
+	</package>
+
+</struts>

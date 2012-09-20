@@ -1,0 +1,45 @@
+*{
+	padding: 0;
+	margin: 0 auto;
+}
+
+* img {
+	border:0 none;
+}
+
+body {
+	background-color: #628FB6 ;
+    text-align: center;
+	font-size: 12px;
+	font-family: 宋体,Arial,Helvetica,sans-serif;
+	line-height: 20px;
+}
+
+a {
+	color:#31516B;
+	cursor:pointer;
+	font-family:"宋体";
+	font-size:12px;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+ul, ol, li {
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+}
+
+.clear1 {
+	clear:both;
+	height:1px;
+	line-height:1px;
+	overflow:hidden;
+}
+.clear0 {
+	clear:both;
+	overflow:hidden;
+}

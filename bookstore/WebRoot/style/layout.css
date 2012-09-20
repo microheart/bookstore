@@ -1,0 +1,141 @@
+/* 包装整个页面，设置页面的宽度及背景色*/
+#wrap {
+	background: #FFFFFF none repeat scroll 0 0;
+	margin: 0 auto;
+	width: 960px;
+}
+
+/* 页面的头部*/
+#header {
+	width: 100%;
+	height: auto; /*134*/
+}
+
+/* 头部的左端*/
+#head_left { /*background:  url("images/logo.jpg") no-repeat;*/
+	float: left;
+	width: 150px;
+	margin-right: 10px;
+}
+
+/* 头部的右端属性*/
+#head_right {
+	width: 800px;
+	float: right;
+	height: auto;
+}
+
+/*顶部*/
+.head_top {
+	height: 33px;
+	line-height: 33px;
+	color: #576976;
+}
+
+.head_middle {
+	margin: 3px 0px 3px 0px;
+}
+
+.head_buttom {
+	margin-top: 5px;
+}
+
+.login_register {
+	float: left;
+}
+
+.head_buy {
+	float: right;
+	margin-right: 50px;
+	color: #628FB6;
+}
+
+.head_buy a {
+	color: #628FB6;
+}
+
+#navigation ul {
+	padding-left: 0;
+	margin-left: 0;
+	background-color: #2175bc;;
+	color: White;
+	/*float: left;*/
+}
+
+#navigation ul li {
+	display: inline;
+}
+
+#navigation ul li a {
+	width: 90px;
+	padding: 0.2em 1em;
+	background-color: #2175bc;
+	color: White;
+	text-decoration: none;
+	float: left; /* 得加上*/
+	border-right: 1px solid #fff;
+	line-height: 25px;
+}
+
+#navigation ul li a:hover {
+	background-color: #2586d7;
+	color: #fff;
+}
+
+/*#searchText {
+	background: url(../images/search01.jpg) no-repeat 2px 1px;
+	padding: 3px 20px;
+	width: 300px;
+	line-height: 20px;
+}*/
+#searchContent {
+	background: transparent url(../images/search01.jpg) no-repeat scroll 2px
+		2px;
+	color: blue;
+	font-size: 12px;
+	padding: 2px 2px 2px 23px;
+	width: 369px;
+}
+
+#content {
+	margin-top: 10px;
+	height: auto; /*没有这个属性，外边距显示的是body背景色*/
+}
+
+#side {
+	width: 180px;
+	float: left;
+}
+
+#main {
+	width: 780px;
+	float: right;
+	height: auto;
+}
+
+.foot {
+	text-align: center;
+	background-color: #FFFFFF;
+}
+
+.foot_menu {
+	border-right: 1px dashed #666666;
+	font-family: Tahoma, Helvetica, Arial, sans-serif;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.right {
+	width: 700px;
+	margin: 20px 10px 10px 20px;
+	padding: 10px 10px 10px 20px;
+}
+
+.right .inputKuang {
+	background:#F0F0F0 none repeat scroll 0 0;
+	border: 3px solid #DFE0E8;
+	/*color: #3D3D3C;*/
+	margin: 0 auto 5px;
+	padding: 7px 10px;
+	width: auto;
+}

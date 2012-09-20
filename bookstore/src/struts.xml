@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- 定义系统参数 -->
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<constant name="struts.custom.i18n.resources" value="globalMessages"></constant>
+	<constant name="struts.url.includeParams" value="none" />
+	
+
+	<!-- 加载其他模块的Action配置文件 -->
+	<include file="struts-home.xml"></include>
+	<include file="struts-member.xml"></include>
+	<include file="struts-book.xml"></include>
+	<include file="struts-bookType.xml"></include>
+	<include file="struts-order.xml"></include>
+	<include file="struts-administor.xml"></include>
+	<include file="struts-comment.xml"></include>
+	
+</struts>

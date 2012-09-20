@@ -1,0 +1,195 @@
+/*关于表单的一些css*/
+.normal190 {
+	width: 180px;
+	height: 19px;
+	border: 0;
+	background: url(../images/text190_bg.gif) no-repeat;
+	overflow: hidden;
+	padding: 2px 5px 0 5px;
+}
+
+.text190 {
+	width: 180px;
+	border: 0;
+	background: transparent;
+}
+
+.btn_black {
+	outline-width: 0px;
+	border: 0px;
+	cursor: pointer;
+	margin: 0 10px 0 10px;
+	line-height: 22px !important;
+	font: 12px/ 20px Arial, Helvetica, sans-serif;
+	color: #fff;
+	height: 18px;
+	width: 49px;
+	background: url(../images/btn_black.gif) no-repeat
+}
+
+.btn_black:hover {
+	background-position: bottom left;
+}
+
+.btn_black4 {
+	outline-width: 0px;
+	border: 0px;
+	cursor: pointer;
+	margin: 5px 50px 0;
+	line-height: 22px !important;
+	font: 12px/ 20px Arial, Helvetica, sans-serif;
+	color: #fff;
+	height: 18px;
+	width: 74px;
+	background: url(../images/btn_black4.gif) no-repeat
+}
+
+.btn_black4:hover {
+	background-position: bottom left;
+}
+
+.essay_title {
+	width: 80px;
+	text-align: left;
+	font-weight: bold;
+	padding-right: 10px;
+}
+
+.normaltextarea490 {
+	width: 490px;
+	height: 98px;
+	border: 0;
+	background: url(../images/textarea490_bg.gif) no-repeat;
+	overflow: hidden;
+	padding: 2px 0px 0 0px;
+	float: left;
+}
+
+.textarea490 {
+	width: 478px;
+	height: 92px;
+	border: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	word-break: break-all;
+	background: transparent;
+	margin-left: 5px;
+}
+
+.danwei {
+	height: 30px;
+	line-height: 30px;
+	margin: 8px 0 5px 0;
+}
+
+.title {
+	padding-top: 4px;
+	padding-right: 4px;
+	width: 80px;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+}
+
+.normaltitle {
+	padding-top: 4px;
+	padding-right: 4px;
+	width: 80px;
+	text-align: right;
+	float: left;
+}
+
+.title100 {
+	padding-top: 4px;
+	padding-right: 4px;
+	width: 150px;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+}
+
+.textvalue {
+	padding-top: 4px;
+	padding-left: 8px;
+	width: auto;
+	text-align: left;
+	color: #7C7C7C;
+	font-weight: bold;
+	float: left;
+}
+
+.title120 {
+	padding-top: 4px;
+	padding-right: 4px;
+	width: 120px;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+}
+
+.textbox180 {
+	border: 1px solid #84A1BD;
+	height: 20px;
+	margin-right: 5px;
+	padding: 4px 2px 3px 5px;
+	width: 180px;
+	font-weight: bold;
+	font-size: 14px;
+	float: left;
+}
+
+.textbox300 {
+	border: 1px solid #84A1BD;
+	height: 20px;
+	margin-right: 5px;
+	padding: 4px 2px 3px 5px;
+	width: 300px;
+	font-weight: bold;
+	font-size: 14px;
+	float: left;
+}
+
+.registerKuang {
+	border: 1px solid #C3C3C3;
+	padding: 45px 20px 30px 20px;
+	width: 760px;
+	background-color: #F4F9FF;
+}
+
+.table {
+	border: 1px solid #999999;
+	border-collapse: collapse;
+	margin: auto auto 20px;
+	text-align: center;
+	width: 100%;
+}
+
+.table thead {
+	background: #999999 none repeat scroll 0 0;
+	color: #FFFFFF;
+	font-weight: bold;
+	line-height: 20px;
+	height: 30px;
+}
+
+.table tbody td {
+	padding: 6px 11px;
+	border-bottom: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+	vertical-align: top;
+	text-align: center;
+}
+
+.commentDiv {
+	border-bottom: 1px #EFEFEF solid;
+	text-align: left;
+	padding: 3px 0 3px 5px;
+}
+
+.commentName {
+	font-weight: bold;
+	border-right: 1px #F0F0F0 solid;
+	width: 50px;
+	text-align: left;
+	float: left;
+}

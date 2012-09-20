@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation"
+		value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
+	<package name="book" extends="struts-default">
+	
+		<interceptors>
+			<interceptor name="adminAuthorityInterceptor" class="xushun.bookstore.interceptor.AdminAuthorityInterceptor"></interceptor>
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="adminAuthorityInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<global-results>
+			<result name="admin_login">/WEB-INF/pages/manager/user/login.jsp</result>
+		</global-results>
+
+		<action name="book_toAddBook"
+			class="xushun.bookstore.action.BookAction" method="toAddBook">
+			<result name="success">/WEB-INF/pages/manager/book/addBook.jsp</result>
+			<interceptor-ref name="adminStack"></interceptor-ref>
+		</action>
+
+		<action name="book_addBook"
+			class="xushun.bookstore.action.BookAction" method="addBook">
+			<interceptor-ref name="adminStack"></interceptor-ref>
+			<interceptor-ref name="fileUpload">
+				<!-- 配置允许上传的文件类型 -->
+				<param name="allowedTypes">
+					image/png,image/gif,image/jpeg,image/bmp,image/jpg
+				</param>
+				<!-- 配置允许上传的文件的大小。(单位：字节) -->
+				<param name="maximumSize">1024*1024</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<!-- 保存路径 -->
+			<param name="savePath">/images</param>
+			<result name="success" type="redirect-action">book_adminListBooks</result>
+			<result name="input">
+				/WEB-INF/pages/manager/book/addBook.jsp
+			</result>
+		</action>
+
+		<action name="book_toEditBook"
+			class="xushun.bookstore.action.BookAction" method="toEditBook">
+			<result>/WEB-INF/pages/manager/book/editBook.jsp</result>
+			<interceptor-ref name="adminStack"></interceptor-ref>
+		</action>
+
+		<action name="book_editBook"
+			class="xushun.bookstore.action.BookAction" method="editBook">
+			<result name="input">/WEB-INF/pages/manager/book/editBook.jsp</result>
+			<result name="success" type="redirect-action">book_adminListBooks</result>
+			<interceptor-ref name="adminStack"></interceptor-ref>
+		</action>
+
+		<action name="book_viewBook"
+			class="xushun.bookstore.action.BookAction" method="viewBook">
+			<result>/WEB-INF/pages/book/viewBook.jsp</result>
+		</action>
+
+		<action name="book_listBooks"
+			class="xushun.bookstore.action.BookAction" method="listBooks">
+			<result>/WEB-INF/pages/book/listBooks.jsp</result>
+		</action>
+
+		<action name="book_listBooksByType"
+			class="xushun.bookstore.action.BookAction"
+			method="listBooksByType">
+			<result>/WEB-INF/pages/book/listBooks.jsp</result>
+		</action>
+
+		<action name="book_listNewBooks"
+			class="xushun.bookstore.action.BookAction" method="listNewBooks">
+			<result>/WEB-INF/pages/book/listBooks.jsp</result>
+		</action>
+
+		<action name="book_listCommendBooks"
+			class="xushun.bookstore.action.BookAction"
+			method="listCommendBooks">
+			<result>/WEB-INF/pages/book/listBooks.jsp</result>
+		</action>
+
+		<action name="book_listHotSaleBooks"
+			class="xushun.bookstore.action.BookAction"
+			method="listHotSaleBooks">
+			<result>/WEB-INF/pages/book/listBooks.jsp</result>
+		</action>
+
+		<action name="book_searchBooks"
+			class="xushun.bookstore.action.BookAction" method="searchBooks">
+			<result>/WEB-INF/pages/book/listBooks.jsp</result>
+		</action>
+
+		<action name="book_adminListBooks"
+			class="xushun.bookstore.action.BookAction" method="adminListBooks">
+			<result>/WEB-INF/pages/manager/book/listBooks.jsp</result>
+			<interceptor-ref name="adminStack"></interceptor-ref>
+		</action>
+
+		<action name="book_adminListBooksByName"
+			class="xushun.bookstore.action.BookAction"
+			method="adminListBooksByName">
+			<result>/WEB-INF/pages/manager/book/listBooks.jsp</result>
+			<interceptor-ref name="adminStack"></interceptor-ref>
+		</action>
+
+	</package>
+
+	<package name="book-json" extends="json-default">
+
+		<action name="book_deleteBook" method="deleteBook"
+			class="xushun.bookstore.action.BookAction">
+			<result type="json"></result>
+		</action>
+	</package>
+
+</struts>
